@@ -13,6 +13,8 @@ public class Plane : MonoBehaviour
     public float speed = 1;
     public AnimationCurve landing;
     float landingTimer;
+    
+
     void OnMouseDown()
     {
         points = new List<Vector2>();
@@ -43,6 +45,7 @@ public class Plane : MonoBehaviour
         Trailpath.positionCount = 1;
         Trailpath.SetPosition(0,transform.position);
         rigidbody = GetComponent<Rigidbody2D>();
+       
     }
     private void FixedUpdate()
     {
@@ -82,5 +85,7 @@ public class Plane : MonoBehaviour
                 Trailpath.positionCount--;
             }
         }
+
+       
     }
 }
