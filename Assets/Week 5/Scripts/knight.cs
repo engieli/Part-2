@@ -14,6 +14,7 @@ public class knight : MonoBehaviour
     public float health;
     public float maxHealth = 5;
     bool isDead;
+    public HeathBar healthbar;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +25,7 @@ public class knight : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (!isDead) return;
+        if (isDead) return;
         movement = destination - (Vector2)transform.position;
         if (movement.magnitude < 0.1)
         {
@@ -35,7 +36,7 @@ public class knight : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isDead) return;
+        if (isDead) return;
         if (Input.GetMouseButtonDown(0) && !clickingOnSelf)
         {
             destination = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -44,9 +45,11 @@ public class knight : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        if (!isDead) return;
-        clickingOnSelf =true;    
-        TakeDamage(2);
+        if (isDead) return;
+        clickingOnSelf =true;
+        gameObject.SendMessage("TakeDamage", 1);
+        //TakeDamage(1);
+        //healthbar.TakeDamage(1);
        
     }
     private void OnMouseUp()
@@ -54,7 +57,7 @@ public class knight : MonoBehaviour
         clickingOnSelf=false;
 
     }
-    void TakeDamage( float damage)
+   public void TakeDamage( float damage)
     {
         health -= damage;
         health = Mathf.Clamp (health, 0, maxHealth);
@@ -65,6 +68,7 @@ public class knight : MonoBehaviour
         }
         else
         {
+            isDead = false;
             animator.SetTrigger("TakeDamage");
         }
 
