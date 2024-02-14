@@ -16,13 +16,15 @@ public class knight : MonoBehaviour
     public float maxHealth = 5;
     bool isDead;
     public HeathBar healthbar;
+   // public FLoat Text healthbar;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        health = maxHealth;
-            isDead= false;
+        // health = maxHealth;
+      //  health.Text = PlayerPrefs.GetFloat(knight.health, 0).
+            isDead = false;
     }
     private void FixedUpdate()
     {
