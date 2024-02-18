@@ -6,41 +6,59 @@ using UnityEngine;
 
 public class Groomingtool : MonoBehaviour
 {
-    public float moveSpeed = 5f;
-    private bool isDragging = false;
-    private Vector2 offset;
-    // Start is called before the first frame update
-    void Update()
+    public GameObject showerheadPrefab;
+    public GameObject blowdryerPrefab;
+
+    private string selectedToolType;
+
+    public void OnPointerClick(PointerEventData eventData)
     {
-        if (Input.GetMouseButtonDown(0))
+        if (eventData.pointerCurrentRaycast.gameObject.name == "showerhead")
         {
-            Vector2 mousePosition = GetMouseWorldPosition();
-            if (IsMouseOverGroomingTool(mousePosition))
-            {
-                offset = (Vector2)transform.position - mousePosition;
-                isDragging = true;
-            }
+            selectedToolType = "showerhead";
         }
-        if (Input.GetMouseButtonUp(0))
+        else if (eventData.pointerCurrentRaycast.gameObject.name == "blowdryerButton")
         {
-            isDragging = false;
+            selectedToolType = "blowdryer";
         }
-        if (isDragging)
-        {
-            Vector2 targetPosition = GetMouseWorldPosition() + offset;
-            transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
-        }
-    }
-    private bool IsMouseOverGroomingTool (Vector2 mousePosition)
-    {
-        Collider2D hitCollider = Physics2D.OverlapPoint(mousePosition);
-        return (hitCollider != null && hitCollider.gameObject == gameObject);
-    }
-    private Vector2 GetMouseWorldPosition()
-    {
-        Vector3 mousePosition = Input.mousePosition;
-        mousePosition.z = -Camera.main.transform.position.z;
-        return Camera.main.ScreenToWorldPoint(mousePosition);
     }
 
+    void Update()
+    {
+        if (selectedToolType != null)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                mousePosition.z = 0f;
+                if (mousePosition != null)
+                {
+                    GameObject groomingToolPrefab = null;
+
+                    switch (selectedToolType)
+                    {
+                        case "showerhead":
+                            groomingToolPrefab = showerheadPrefab;
+                            break;
+                        case "blowdryer":
+                            groomingToolPrefab = blowdryerPrefab;
+                            break;
+                    }
+
+                    if (groomingToolPrefab != null)
+                    {
+                        Instantiate(groomingToolPrefab, mousePosition, Quaternion.identity);
+                    }
+
+                    selectedToolType = null;
+
+
+                }
+            }
+
+        }
+
+    }      
+            
+        
 }

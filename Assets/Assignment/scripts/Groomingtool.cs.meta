@@ -3,7 +3,9 @@ guid: c2f8dc2057853524ab5fcac8d4fbef68
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - showerheadPrefab: {fileID: 6215158307672177029, guid: 79f3a0046cdc1244aaae13e380aeea8a, type: 3}
+  - blowdryerPrefab: {fileID: 3959137995236358846, guid: 5566cffaee777ab4395722677eb0afd7, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
