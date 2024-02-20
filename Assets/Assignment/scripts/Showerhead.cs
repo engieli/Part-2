@@ -1,4 +1,4 @@
- using UnityEngine.UI;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,10 +7,9 @@ using UnityEngine;
 public class Showerhead : MonoBehaviour
 {
     public Transform cat;
-    public float drenchDistance = 1.0f; 
+    public float drenchDistance = 1.0f;
 
     private Animator catAnimator;
-
 
     public float moveSpeed = 5f;
     private bool isDragging = false;
@@ -23,8 +22,8 @@ public class Showerhead : MonoBehaviour
 
     void Update()
     {
-        // Check if the player is dragging the grooming tool
-        if (Input.GetMouseButtonDown(0))
+        // Check if the player is dragging the showerhead
+        if (Input.GetMouseButton(0))
         {
             Vector2 mousePosition = GetMouseWorldPosition();
             if (IsMouseOverGroomingTool(mousePosition))
@@ -33,18 +32,17 @@ public class Showerhead : MonoBehaviour
                 isDragging = true;
             }
         }
-        // Release the grooming tool when the user releases the mouse button
-        if (Input.GetMouseButtonUp(0))
+        else
         {
             isDragging = false;
         }
-        // Move the grooming tool while the user is dragging it
+
+        // Move the showerhead while the player is dragging it
         if (isDragging)
         {
             Vector2 targetPosition = GetMouseWorldPosition() + offset;
             transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
         }
-
 
         // Calculate the distance between the cat and the showerhead
         float distance = Vector3.Distance(cat.position, transform.position);
@@ -53,14 +51,13 @@ public class Showerhead : MonoBehaviour
         if (distance < drenchDistance)
         {
             // Trigger the cat animator to the drenched state
-            catAnimator.SetBool("Drenched",true);
+            catAnimator.SetBool("Drenched", true);
         }
-       // else
-      //      catAnimator.SetBool("Drenched", false);
-
-       // }
+        else
+        {
+            catAnimator.SetBool("Drenched", false);
+        }
     }
-   
 
     private bool IsMouseOverGroomingTool(Vector2 mousePosition)
     {
@@ -74,5 +71,4 @@ public class Showerhead : MonoBehaviour
         mousePosition.z = -Camera.main.transform.position.z;
         return Camera.main.ScreenToWorldPoint(mousePosition);
     }
-
 }

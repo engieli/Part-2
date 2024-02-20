@@ -6,28 +6,27 @@ using UnityEngine;
 
 public class cat : MonoBehaviour
 {
-    public Transform blowdryer;
-    public Transform showerhead;
-
-    private Animator animator;
-
-    void Start()
-    {
-        animator = GetComponent<Animator>();
-        animator.SetBool("Drenched", false); 
-    }
+    public Animator animator;
+    public GameObject blowDryer;
+    public float triggerDistance = 1f;
 
     void Update()
     {
-        Vector3 directionToBlowdryer = blowdryer.position - transform.position;
-        Vector3 normalizedDirection = directionToBlowdryer.normalized;
+        // Calculate the distance between the blow dryer and the cat
+        float distance = Vector2.Distance(transform.position, blowDryer.transform.position);
 
-        float angleX = Mathf.Atan2(normalizedDirection.y, normalizedDirection.x) * Mathf.Rad2Deg;
-        float angleY = Mathf.Atan2(normalizedDirection.x, normalizedDirection.y) * Mathf.Rad2Deg;
-
-        animator.SetFloat("BlownX", angleX);
-        animator.SetFloat("BlownY", angleY);
-        animator.SetBool("IsBlowdrying", true); 
-        animator.SetBool("Drenched", true); 
+        // Check if the blow dryer is near the cat
+        if (distance <= triggerDistance)
+        {
+            // Set the animator parameters based on the proximity of the blow dryer
+            animator.SetBool("IsBlowingDry", true);
+            animator.SetBool("Drenched", false);
+        }
+        else
+        {
+            // Reset the animator parameters if the blow dryer is not near the cat
+            animator.SetBool("IsBlowingDry", false);
+            animator.SetBool("Drenched", true);
+        }
     }
 }
