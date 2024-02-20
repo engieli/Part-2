@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 472492864}
   - component: {fileID: 472492863}
+  - component: {fileID: 472492867}
   - component: {fileID: 472492866}
   - component: {fileID: 472492865}
   m_Layer: 0
@@ -203,8 +204,8 @@ Transform:
   m_GameObject: {fileID: 472492862}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.01, y: 0.27, z: -1.6710938}
-  m_LocalScale: {x: 3.192, y: 3.192, z: 3.192}
+  m_LocalPosition: {x: 4.19, y: 3.33, z: -1.6710938}
+  m_LocalScale: {x: 3.0554907, y: 3.192, z: 3.192}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -238,7 +239,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.02611251, y: 0.04576083}
@@ -251,11 +252,29 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 472492862}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c2f8dc2057853524ab5fcac8d4fbef68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 30
+  blowdryer: {fileID: 1014655379}
+  showerhead: {fileID: 472492864}
+--- !u!114 &472492867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 472492862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 587573ab38785594e9e68564cc7b213c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cat: {fileID: 1429741825}
+  drenchDistance: 1
+  moveSpeed: 30
 --- !u!1 &1014655377
 GameObject:
   m_ObjectHideFlags: 0
@@ -267,6 +286,7 @@ GameObject:
   - component: {fileID: 1014655379}
   - component: {fileID: 1014655378}
   - component: {fileID: 1014655381}
+  - component: {fileID: 1014655382}
   - component: {fileID: 1014655380}
   m_Layer: 0
   m_Name: Blowdryer
@@ -336,8 +356,8 @@ Transform:
   m_GameObject: {fileID: 1014655377}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0011316, y: -0.20335746, z: -1.6190914}
-  m_LocalScale: {x: 2.9003, y: 2.9003, z: 2.9003}
+  m_LocalPosition: {x: 0.55, y: 3.33, z: -1.6190914}
+  m_LocalScale: {x: 3.4461365, y: 3.3098223, z: 2.9003}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -349,11 +369,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1014655377}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c2f8dc2057853524ab5fcac8d4fbef68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 30
+  blowdryer: {fileID: 1014655379}
+  showerhead: {fileID: 472492864}
 --- !u!70 &1014655381
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -383,12 +406,28 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.0252192, y: 0.039744623}
   m_Size: {x: 0.31781608, y: 0.45442206}
   m_Direction: 0
+--- !u!114 &1014655382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1014655377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d65c52f7aa491574cb48e8edc88547c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cat: {fileID: 1429741825}
+  blowDistance: 1
+  dryingTime: 15
+  moveSpeed: 30
 --- !u!1 &1429741823
 GameObject:
   m_ObjectHideFlags: 0
@@ -399,6 +438,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1429741825}
   - component: {fileID: 1429741824}
+  - component: {fileID: 1429741827}
+  - component: {fileID: 1429741826}
   m_Layer: 0
   m_Name: Cat
   m_TagString: Untagged
@@ -473,6 +514,41 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1429741826
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1429741823}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ce299708a508e6943a5407b0c2175ece, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1429741827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1429741823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8b4c4afde789164e89beffbcec1866b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blowdryer: {fileID: 1014655379}
+  showerhead: {fileID: 472492864}
 --- !u!1 &1889398522
 GameObject:
   m_ObjectHideFlags: 0

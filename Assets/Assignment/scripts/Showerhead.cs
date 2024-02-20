@@ -1,22 +1,24 @@
-using UnityEngine.UI;
+ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Groomingtool : MonoBehaviour
+public class Showerhead : MonoBehaviour
 {
+    public Transform cat;
+    public float drenchDistance = 1.0f; 
+
+    private Animator catAnimator;
+
+
     public float moveSpeed = 5f;
     private bool isDragging = false;
     private Vector2 offset;
 
-    public Transform blowdryer;
-    public Transform showerhead;
- 
-
     void Start()
     {
-    
+        catAnimator = cat.GetComponent<Animator>();
     }
 
     void Update()
@@ -25,7 +27,7 @@ public class Groomingtool : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Vector2 mousePosition = GetMouseWorldPosition();
-            if (IsMouseOverGroomingTool(mousePosition)) ;
+            if (IsMouseOverGroomingTool(mousePosition))
             {
                 offset = (Vector2)transform.position - mousePosition;
                 isDragging = true;
@@ -43,8 +45,22 @@ public class Groomingtool : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
         }
 
-    
+
+        // Calculate the distance between the cat and the showerhead
+        float distance = Vector3.Distance(cat.position, transform.position);
+
+        // Check if the showerhead is near the cat
+        if (distance < drenchDistance)
+        {
+            // Trigger the cat animator to the drenched state
+            catAnimator.SetBool("Drenched",true);
+        }
+       // else
+      //      catAnimator.SetBool("Drenched", false);
+
+       // }
     }
+   
 
     private bool IsMouseOverGroomingTool(Vector2 mousePosition)
     {
@@ -59,5 +75,4 @@ public class Groomingtool : MonoBehaviour
         return Camera.main.ScreenToWorldPoint(mousePosition);
     }
 
-  
 }
