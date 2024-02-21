@@ -63,26 +63,5 @@ public class cat : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject == blowDryer)
-        {
-            satisfactionScript.SendMessage("drying", 1f);
-            // Set the animator parameters based on interaction with the blow dryer
-            animator.SetBool("IsBlowingDry", true);
-            animator.SetBool("Drenched", false);
-            Debug.Log("satisfactionScript"); 
-        }
-
-    }
-
-    void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.gameObject == blowDryer)
-        {
-            // Reset the animator parameters when the blow dryer exits the cat's trigger zone
-            animator.SetBool("IsBlowingDry", false);
-            animator.SetBool("Drenched", true);
-        }
-    }
+ 
 }
