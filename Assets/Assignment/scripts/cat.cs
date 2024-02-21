@@ -10,8 +10,31 @@ public class cat : MonoBehaviour
     public GameObject blowDryer;
     public float triggerDistance = 1f;
     public Satisfaction satisfactionScript;
-  
-  
+    public AnimationCurve curve;
+    public float duration = 1f;
+    private Vector3 startPosition;
+    private Vector3 targetPosition;
+    public GameObject sit;
+
+    void Start()
+    {
+        startPosition = transform.position;
+        targetPosition = sit.transform.position; 
+        StartCoroutine(AnimateCatEntrance());
+    }
+
+    IEnumerator AnimateCatEntrance()
+    {
+        float startTime = Time.time;
+        while (Time.time - startTime < duration)
+        {
+            float t = (Time.time - startTime) / duration;
+            float curveValue = curve.Evaluate(t);
+            transform.position = Vector3.Lerp(startPosition, targetPosition, curveValue);
+            yield return null;
+        }
+    }
+
     void Update()
     {
         // Calculate the distance between the blow dryer and the cat
@@ -20,8 +43,7 @@ public class cat : MonoBehaviour
         // Check if the blow dryer is near the cat
         if (distance <= triggerDistance)
         {
-
-            satisfactionScript.SendMessage("drying",1);
+            satisfactionScript.SendMessage("drying", 1);
             // Set the animator parameters based on the proximity of the blow dryer
             animator.SetBool("IsBlowingDry", true);
             animator.SetBool("Drenched", false);
@@ -36,19 +58,19 @@ public class cat : MonoBehaviour
             float x = 0f, y = 0f;
             if (angle >= -45f && angle < 45f)
             {
-                x = 1f; 
+                x = 1f;
             }
             else if (angle >= 45f && angle < 135f)
             {
-                y = 1f; 
+                y = 1f;
             }
             else if (angle >= -135f && angle < -45f)
             {
-                y = -1f; 
+                y = -1f;
             }
             else
             {
-                x = -1f; 
+                x = -1f;
             }
 
             // Set the blend tree parameters in the Animator
@@ -62,6 +84,4 @@ public class cat : MonoBehaviour
             animator.SetBool("Drenched", true);
         }
     }
-
- 
 }

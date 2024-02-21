@@ -12,6 +12,7 @@ public class Blowdryer : MonoBehaviour
     private Vector2 offset;
     private float satisfactionLevel = 0f;
 
+
     // Specify rotation angle in degrees
     public float rotationAngle = 45f;
     void Update()
