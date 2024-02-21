@@ -444,7 +444,7 @@ GameObject:
   - component: {fileID: 847666660}
   - component: {fileID: 847666661}
   m_Layer: 0
-  m_Name: SceneManager
+  m_Name: Sceneswapper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -477,6 +477,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0fbac0e99eaa3347b64454fc3029e18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  order: 3
 --- !u!1 &1309471805
 GameObject:
   m_ObjectHideFlags: 0
@@ -560,8 +561,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
+      - m_Target: {fileID: 847666661}
+        m_TargetAssemblyTypeName: screenswapper, Assembly-CSharp
         m_MethodName: LoadNextScene
         m_Mode: 1
         m_Arguments:
