@@ -10,12 +10,13 @@ public class Blowdryer : MonoBehaviour
     public float moveSpeed = 5f;
     private bool isDragging = false;
     private Vector2 offset;
+    private float satisfactionLevel = 0f;
 
     // Specify rotation angle in degrees
-    public float rotationAngle = 45f; // Example angle, change as needed
-
+    public float rotationAngle = 45f;
     void Update()
     {
+
         // Check if the player is dragging the blow dryer
         if (Input.GetMouseButtonDown(0))
         {

@@ -9,7 +9,9 @@ public class cat : MonoBehaviour
     public Animator animator;
     public GameObject blowDryer;
     public float triggerDistance = 1f;
-
+    public Satisfaction satisfactionScript;
+  
+  
     void Update()
     {
         // Calculate the distance between the blow dryer and the cat
@@ -18,6 +20,8 @@ public class cat : MonoBehaviour
         // Check if the blow dryer is near the cat
         if (distance <= triggerDistance)
         {
+
+            satisfactionScript.SendMessage("drying",1);
             // Set the animator parameters based on the proximity of the blow dryer
             animator.SetBool("IsBlowingDry", true);
             animator.SetBool("Drenched", false);
@@ -63,10 +67,13 @@ public class cat : MonoBehaviour
     {
         if (other.gameObject == blowDryer)
         {
+            satisfactionScript.SendMessage("drying", 1f);
             // Set the animator parameters based on interaction with the blow dryer
             animator.SetBool("IsBlowingDry", true);
             animator.SetBool("Drenched", false);
+            Debug.Log("satisfactionScript"); 
         }
+
     }
 
     void OnTriggerExit2D(Collider2D other)
