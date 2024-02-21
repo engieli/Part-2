@@ -3,17 +3,21 @@ using UnityEngine.EventSystems;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class Player : MonoBehaviour
 {
     SpriteRenderer sr;
+    Rigidbody2D rb;
     public Color selectedColor;
     public Color unselectedColor;
     public Sprite sprite;
+    public float speed = 10;
     // Start is called before the first frame update
    private void Start()
     {
         sr = GetComponent<SpriteRenderer>();
+       rb = GetComponent<Rigidbody2D>();
         Selected(false);
     }
 
@@ -33,5 +37,9 @@ public class Player : MonoBehaviour
         {
             sr.color = unselectedColor;
         }
+    }
+    public void Move(Vector2 direction)
+    {
+       rb.AddForce(direction * speed, ForceMode2D.Impulse);
     }
 }
