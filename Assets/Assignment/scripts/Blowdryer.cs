@@ -6,9 +6,13 @@ using UnityEngine;
 
 public class Blowdryer : MonoBehaviour
 {
+
     public float moveSpeed = 5f;
     private bool isDragging = false;
     private Vector2 offset;
+
+    // Specify rotation angle in degrees
+    public float rotationAngle = 45f; // Example angle, change as needed
 
     void Update()
     {
@@ -34,7 +38,29 @@ public class Blowdryer : MonoBehaviour
         {
             Vector2 targetPosition = GetMouseWorldPosition() + offset;
             transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+
+            // Rotate the movement direction based on the specified angle
+            RotateMovementDirection(rotationAngle);
         }
+    }
+
+
+    //makes it look like you really picked up the blowdryer!
+
+    private void RotateMovementDirection(float angleDegrees)
+    {
+       
+        float angleRadians = angleDegrees * Mathf.Deg2Rad;
+
+        
+        float rotatedX = Mathf.Cos(angleRadians);
+        float rotatedY = Mathf.Sin(angleRadians);
+
+       
+        Vector2 rotatedDirection = new Vector2(rotatedX, rotatedY);
+
+   
+        transform.up = rotatedDirection; 
     }
 
     private bool IsMouseOverBlowDryer(Vector2 mousePosition)

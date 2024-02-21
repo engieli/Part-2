@@ -21,10 +21,59 @@ public class cat : MonoBehaviour
             // Set the animator parameters based on the proximity of the blow dryer
             animator.SetBool("IsBlowingDry", true);
             animator.SetBool("Drenched", false);
+
+            // Calculate direction from cat to blow dryer
+            Vector3 direction = (blowDryer.transform.position - transform.position).normalized;
+
+            // Calculate angle of direction relative to the cat's forward direction
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+            // Determine the corresponding blend tree parameters based on the angle
+            float x = 0f, y = 0f;
+            if (angle >= -45f && angle < 45f)
+            {
+                x = 1f; 
+            }
+            else if (angle >= 45f && angle < 135f)
+            {
+                y = 1f; 
+            }
+            else if (angle >= -135f && angle < -45f)
+            {
+                y = -1f; 
+            }
+            else
+            {
+                x = -1f; 
+            }
+
+            // Set the blend tree parameters in the Animator
+            animator.SetFloat("BlownX", x);
+            animator.SetFloat("BlownY", y);
         }
         else
         {
             // Reset the animator parameters if the blow dryer is not near the cat
+            animator.SetBool("IsBlowingDry", false);
+            animator.SetBool("Drenched", true);
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject == blowDryer)
+        {
+            // Set the animator parameters based on interaction with the blow dryer
+            animator.SetBool("IsBlowingDry", true);
+            animator.SetBool("Drenched", false);
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject == blowDryer)
+        {
+            // Reset the animator parameters when the blow dryer exits the cat's trigger zone
             animator.SetBool("IsBlowingDry", false);
             animator.SetBool("Drenched", true);
         }
